@@ -16,3 +16,13 @@ exports.div = function divide(a, b) {
     }
     return a / b;
 }
+
+//Synthaxe d'exports de méthodes variables objets etc
+
+module.exports = {
+    add,
+    sub,
+    mult,
+    div
+};
+
