@@ -1,5 +1,6 @@
 const express = require('express');
 const ejs = require('ejs');
+const {validationResult, body} = require('express-validator');
 // Initialisation d'ExpressJS
 const app = express();
  
@@ -43,12 +44,20 @@ app.get('/cities', (req, res) => {
 });
  
 // Route post qui ajoute une ville au tableau de ville
-app.post('/cities', (req, res) => {
+app.post('/cities', body('city').isLength({min: 3, max: 100}).escape(), (req, res) => {
+    //on récupere un objet validationResult qui contient les erreurs de validation
+    const result = validationResult(req);
+
+    if (!result.isEmpty()) {
+
     console.log(req.body);
     const city = req.body.city;
     console.log("City :", city);
     listCities.push(city);
     res.redirect('/cities');
+    }
+    //sinon je renvoie les erreurs
+    res.send({errors : result.array()});
 });
  
 // Route retournant une ville spécifique
