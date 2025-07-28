@@ -1,22 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>Accueil</title>
 </head>
 <body>
-    <h1>Node.js</h1>
-    <h2>Les moteurs de template : démonstration</h2>
-    <p>Hello World !</p>
-    <h3>Bienvenue <%=user.firstname %></h3>
- 
-    <b>Liste des villes : </b>
-    <ul>
-        <% cities.forEach(city => { %>
-            <li><%=city %></li>
-        <% }); %>
-    </ul>
+  <h1>Bienvenue <%= user.firstname %> <%= user.lastname %> !</h1>
+
+  <h2>Liste des villes :</h2>
+  <ul>
+    <% cities.forEach(city => { %>
+      <li><%= city %></li>
+    <% }); %>
+  </ul>
+
+  <h2>Ajouter une ville</h2>
+  <form action="/cities" method="POST">
+    <fieldset>
+      <legend>Formulaire</legend>
+      <label for="city">Ville :</label>
+      <input type="text" id="city" name="city" required>
+      <input type="submit" value="VALIDER">
+    </fieldset>
+  </form>
 </body>
 </html>
- 

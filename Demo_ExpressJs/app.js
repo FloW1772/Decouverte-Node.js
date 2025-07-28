@@ -2,8 +2,8 @@ const express = require('express');
 const ejs = require('ejs');
 // Initialisation d'ExpressJS
 const app = express();
-
-//configuration du moteur de template EJS
+ 
+// Configuration d'EJS
 app.set('view engine', 'ejs');
  
 const port = 3000;
@@ -12,6 +12,9 @@ user = {
     firstname: "Bob",
     lastname: "L'Eponge"
 }
+ 
+// Middleware très important pour les formulaires car il permet de décoder le corps des requêtes
+app.use(express.urlencoded({ extended: false }));
  
 // Middleware global s'appliquant à toute l'application
 app.use((req, res, next) => {
@@ -36,7 +39,16 @@ app.get('/', (req, res) => {
  
 // Route globale retournant le tableau de villes
 app.get('/cities', (req, res) => {
-    res.send(listCities);
+    res.render('cities', {cities: listCities});
+});
+ 
+// Route post qui ajoute une ville au tableau de ville
+app.post('/cities', (req, res) => {
+    console.log(req.body);
+    const city = req.body.city;
+    console.log("City :", city);
+    listCities.push(city);
+    res.redirect('/cities');
 });
  
 // Route retournant une ville spécifique
