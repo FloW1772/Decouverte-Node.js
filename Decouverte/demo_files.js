@@ -17,3 +17,6 @@ fs.readFile('file.txt', 'utf-8', (err, data) => {
 const data = fs.readFileSync('file.txt', 'utf-8');
 console.log('Contenu du fichier : ');
 console.log(data);
+
+//écriture dans un fichier de maniere synchrone
+fs.writeFileSync('fichier.txt', 'Bienvenue dans le monde de Node.js !', 'utf-8');
