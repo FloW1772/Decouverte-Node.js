@@ -1,6 +1,10 @@
 const express = require('express');
+const ejs = require('ejs');
 // Initialisation d'ExpressJS
 const app = express();
+
+//configuration du moteur de template EJS
+app.set('view engine', 'ejs');
  
 const port = 3000;
 listCities = ['Paris', 'Lyon', 'Marseille', 'Nantes', 'Rennes'];
@@ -27,7 +31,7 @@ app.use('/cities/:id', (req, res, next) => {
  
 // Route initiale retournant "Hello World!"
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.render('index', {user: user, cities: listCities});
 });
  
 // Route globale retournant le tableau de villes

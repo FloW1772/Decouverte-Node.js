@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Node.js</h1>
+    <h2>Les moteurs de template : démonstration</h2>
+    <p>Hello World !</p>
+    <h3>Bienvenue <%=user.firstname %></h3>
+ 
+    <b>Liste des villes : </b>
+    <ul>
+        <% cities.forEach(city => { %>
+            <li><%=city %></li>
+        <% }); %>
+    </ul>
+</body>
+</html>
+ 
