@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice 3</title>
+</head>
+<body>
+    <h1>Ajout d'un nouvel utilisateur</h1>
+
+    <form action="/admin" method="post">
+        <fieldset>
+            <legend>Nouvel utilisateur </legend>
+            <div>
+                <label for="name">Nom : </label>
+                <input type="text" id="name" name="name">
+            </div>
+
+            <div>
+                <label for="role">Rôle : </label>
+                <select id="role" name="role">
+                    <option value="admin">Administrateur</option>
+                    <option value="user">Utilisateur</option>
+                </select>
+            </div>
+
+            <div>
+                <input type="submit" value="Valider">
+            </div>
+        </fieldset>
+    </form>
+</body>
+</html>

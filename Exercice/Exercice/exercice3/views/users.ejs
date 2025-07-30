@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des utilisateurs</title>
+</head>
+<body>
+    <h1>Utilisateurs</h1>
+    <ul>
+        <% users.forEach(function(user) { %>
+            <li><%= user.name %> (<%= user.role %>)</li>
+        <% }); %>
+    </ul>
+    <a href="/admin">Ajouter un utilisateur</a>
+</body>
+</html>
