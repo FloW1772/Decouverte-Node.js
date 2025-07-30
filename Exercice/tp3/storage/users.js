@@ -17,9 +17,10 @@ const users = [
 ]
 
 module.exports = {
-  addUser: function (email, password) {
-    users.push({ uuid: uuid.v4(), email: email, password: password, role: 'user' })
-  },
+ addUser: function (email, password, role = 'user') {
+  users.push({ uuid: uuid.v4(), email, password, role });
+}
+,
   findByEmail: function (email) {
     return users.find((user) => user.email === email)
   },

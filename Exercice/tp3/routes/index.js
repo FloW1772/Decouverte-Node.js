@@ -50,18 +50,20 @@ router.post('/login', async (req, res) => {
     return res.redirect('/login');
   }
 
-  req.session.user = { uuid: user.uuid, email: user.email, role: user.role };
+     req.session.user = { uuid: user.uuid, email: user.email, role: user.role };
   req.flash('success', `Bienvenue ${user.email} !`);
   res.redirect('/');
 });
 
 // === ROUTES REGISTER ===
 router.get('/register', (req, res) => {
-  res.render('register');
+  const isAdmin = req.session.user && req.session.user.role === 'admin';
+  res.render('register', { isAdmin });
 });
 
+
 router.post('/register', async (req, res) => {
-  const { email, password, confirmPassword } = req.body;
+  const { email, password, confirmPassword, role } = req.body;
 
   if (password !== confirmPassword) {
     req.flash('error', 'Les mots de passe ne correspondent pas.');
@@ -73,17 +75,32 @@ router.post('/register', async (req, res) => {
     return res.redirect('/register');
   }
 
+  // Seuls les admins connectés peuvent créer un admin
+  let assignedRole = 'user';
+  if (req.session.user && req.session.user.role === 'admin' && role === 'admin') {
+    assignedRole = 'admin';
+  }
+
   const hashedPassword = await argon2.hash(password);
-  storage.addUser(email, hashedPassword);
+  storage.addUser(email, hashedPassword, assignedRole);
 
   req.flash('success', 'Compte créé avec succès. Vous pouvez vous connecter.');
   res.redirect('/login');
 });
+
+
+
 // === LISTE DES UTILISATEURS ===
 router.get('/users', (req, res) => {
   const users = storage.findAll();
   res.render('users', { users });
 });
 
+// Déconnexion
+router.get('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.redirect('/login');
+  });
+});
 
 module.exports = router;
