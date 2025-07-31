@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
     numberToFind = RandomNumber.generate();
   }
   console.log(numberToFind);
-  res.render('index');
+  res.render('index', { activePage: 'home', user: req.session.user });
 });
 
 router.post('/', (req, res) => {
@@ -21,12 +21,13 @@ router.post('/', (req, res) => {
 
   if (playAgain) {
     numberToFind = RandomNumber.generate();
-    res.render('index');
+    res.render('index', { activePage: 'home', user: req.session.user });
   } else {
     const response = tryNumber(attempt, numberToFind);
-    res.render('index', { result: response })
+    res.render('index', { activePage: 'home', user: req.session.user, result: response });
   }
 });
+
 
 router.get('/logout', (req, res) => {
   req.session.destroy();
