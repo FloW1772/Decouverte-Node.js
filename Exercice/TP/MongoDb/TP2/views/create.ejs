@@ -9,54 +9,29 @@
 <body>
     <p><strong>Note :</strong> Cette page est accessible uniquement aux administrateurs.</p>
 
-    <h1>Créer une nouvelle équipe</h1>
+    <h1>Créer une équipe</h1>
 
-    <% if (flashError && flashError.length> 0) { %>
-        <div class="error">
-            <% flashError.forEach(msg=> { %>
-                <p>
-                    <%= msg %>
-                </p>
-                <% }); %>
-        </div>
-        <% } %>
+<% if (flashError && flashError.length > 0) { %>
+  <div style="color:red;"><%= flashError[0] %></div>
+<% } %>
+<% if (flashSuccess && flashSuccess.length > 0) { %>
+  <div style="color:green;"><%= flashSuccess[0] %></div>
+<% } %>
 
-            <% if (flashSuccess && flashSuccess.length> 0) { %>
-                <div class="success">
-                    <% flashSuccess.forEach(msg=> { %>
-                        <p>
-                            <%= msg %>
-                        </p>
-                        <% }); %>
-                </div>
-                <% } %>
+<form action="/teams/create" method="POST">
+  <label for="name">Nom de l'équipe :</label>
+  <input type="text" id="name" name="name" required minlength="4">
 
-                    <form action="/teams/create" method="POST">
-                        <div>
-                            <label for="name">Nom de l’équipe :</label>
-                            <input type="text" id="name" name="name" required minlength="4">
-                        </div>
+  <label for="members">Membres (Ctrl+clic pour sélectionner plusieurs) :</label>
+  <select id="members" name="members" multiple size="5" required>
+    <% users.forEach(user => { %>
+      <option value="<%= user._id %>"><%= user.name || user.email %></option>
+    <% }) %>
+  </select>
 
-                        <div>
-                            <label for="members">Membres de l’équipe :</label><br>
-                            <select id="members" name="members" multiple size="5" required>
-                                <% if (users && users.length> 0) { %>
-                                    <% users.forEach(user=> { %>
-                                        <option value="<%= user._id %>">
-                                            <%= user.username %> (<%= user.email %>)
-                                        </option>
-                                        <% }); %>
-                                            <% } else { %>
-                                                <option disabled>Aucun utilisateur disponible</option>
-                                                <% } %>
-                            </select>
-                            <p style="font-size: 0.9em;">(Maintenir Ctrl ou Cmd pour sélectionner plusieurs)</p>
-                        </div>
+  <button type="submit">Créer l'équipe</button>
+</form>
 
-                        <div>
-                            <button type="submit">Créer l’équipe</button>
-                        </div>
-                    </form>
 
                     <p><a href="/">Retour à l’accueil</a></p>
 </body>

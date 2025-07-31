@@ -1,0 +1,14 @@
+<h1>Liste des équipes</h1>
+
+<ul>
+  <% teams.forEach(team => { %>
+    <li>
+      <strong><%= team.name %></strong>
+      <ul>
+        <% team.members.forEach(member => { %>
+          <li><%= member.name || member.email %></li>
+        <% }) %>
+      </ul>
+    </li>
+  <% }) %>
+</ul>
