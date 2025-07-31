@@ -4,36 +4,149 @@
 <head>
     <meta charset="UTF-8">
     <title>Créer une équipe</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f4f8;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+      }
+
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 30px;
+      }
+
+      p.note {
+        background-color: #fffae6;
+        border: 1px solid #ffe58f;
+        padding: 10px 15px;
+        max-width: 600px;
+        margin: 0 auto 30px auto;
+        border-radius: 5px;
+        font-weight: 600;
+        color: #ad8b00;
+        text-align: center;
+      }
+
+      form {
+        background: white;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 30px 40px;
+        border-radius: 8px;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #34495e;
+      }
+
+      input[type="text"],
+      select {
+        width: 100%;
+        padding: 10px 12px;
+        margin-bottom: 20px;
+        border: 1.5px solid #bdc3c7;
+        border-radius: 5px;
+        font-size: 1em;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+      }
+
+      input[type="text"]:focus,
+      select:focus {
+        border-color: #2980b9;
+        outline: none;
+      }
+
+      button {
+        background-color: #2980b9;
+        color: white;
+        font-weight: 600;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #1c5980;
+      }
+
+      .flash-error {
+        color: #c0392b;
+        background-color: #f8d7da;
+        padding: 10px 15px;
+        border-radius: 5px;
+        max-width: 600px;
+        margin: 0 auto 20px auto;
+        font-weight: 600;
+        text-align: center;
+      }
+
+      .flash-success {
+        color: #27ae60;
+        background-color: #d4edda;
+        padding: 10px 15px;
+        border-radius: 5px;
+        max-width: 600px;
+        margin: 0 auto 20px auto;
+        font-weight: 600;
+        text-align: center;
+      }
+
+      p.back-link {
+        text-align: center;
+        margin-top: 30px;
+      }
+
+      p.back-link a {
+        color: #2980b9;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      p.back-link a:hover {
+        text-decoration: underline;
+      }
+    </style>
 </head>
 
 <body>
-    <p><strong>Note :</strong> Cette page est accessible uniquement aux administrateurs.</p>
+    <p class="note"><strong>Note :</strong> Cette page est accessible uniquement aux administrateurs.</p>
 
     <h1>Créer une équipe</h1>
 
-<% if (flashError && flashError.length > 0) { %>
-  <div style="color:red;"><%= flashError[0] %></div>
-<% } %>
-<% if (flashSuccess && flashSuccess.length > 0) { %>
-  <div style="color:green;"><%= flashSuccess[0] %></div>
-<% } %>
+    <% if (flashError && flashError.length > 0) { %>
+      <div class="flash-error"><%= flashError[0] %></div>
+    <% } %>
+    <% if (flashSuccess && flashSuccess.length > 0) { %>
+      <div class="flash-success"><%= flashSuccess[0] %></div>
+    <% } %>
 
-<form action="/teams/create" method="POST">
-  <label for="name">Nom de l'équipe :</label>
-  <input type="text" id="name" name="name" required minlength="4">
+    <form action="/teams/create" method="POST">
+      <label for="name">Nom de l'équipe :</label>
+      <input type="text" id="name" name="name" required minlength="4" placeholder="Ex : Les Champions">
 
-  <label for="members">Membres (Ctrl+clic pour sélectionner plusieurs) :</label>
-  <select id="members" name="members" multiple size="5" required>
-    <% users.forEach(user => { %>
-      <option value="<%= user._id %>"><%= user.name || user.email %></option>
-    <% }) %>
-  </select>
+      <label for="members">Membres (Ctrl+clic pour sélectionner plusieurs) :</label>
+      <select id="members" name="members" multiple size="5" required>
+        <% users.forEach(user => { %>
+          <option value="<%= user._id %>"><%= user.name || user.email %></option>
+        <% }) %>
+      </select>
 
-  <button type="submit">Créer l'équipe</button>
-</form>
+      <button type="submit">Créer l'équipe</button>
+    </form>
 
-
-                    <p><a href="/">Retour à l’accueil</a></p>
+    <p class="back-link"><a href="/">Retour à l’accueil</a></p>
 </body>
 
 </html>
