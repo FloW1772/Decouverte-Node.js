@@ -10,10 +10,10 @@
                 <a class="nav-link <%= activePage === 'home' ? 'active' : '' %>" href="/" aria-current="page">Jouer</a>
             </li>
             <li class="nav-item <%= activePage === 'ranking' ? 'active' : '' %>">
-                <a class="nav-link <%= activePage === 'ranking' ? 'active' : '' %>" href="#">Classement</a>
+                <a class="nav-link <%= activePage === 'ranking' ? 'active' : '' %>" href="/game/classement">Classement</a>
             </li>
             <li class="nav-item <%= activePage === 'teams' ? 'active' : '' %>">
-                <a class="nav-link <%= activePage === 'teams' ? 'active' : '' %>" href="#">Equipes</a>
+                <a class="nav-link <%= activePage === 'teams' ? 'active' : '' %>" href="/teams">Equipes</a>
             </li>
             <% if (typeof user !=="undefined" && user.role==='admin' ) { %>
                 <li class="nav-item <%= activePage === 'users' ? 'active' : '' %>">

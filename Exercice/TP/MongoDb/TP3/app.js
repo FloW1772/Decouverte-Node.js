@@ -11,6 +11,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
 const teamsRouter = require('./routes/teams'); // ✅ Import du routeur des équipes
+const gameRouter = require('./routes/game'); // <-- Import routeur jeu
 
 const app = express();
 
@@ -52,6 +53,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/login', loginRouter);
 app.use('/teams', teamsRouter); // ✅ Route pour les équipes correctement placée
+app.use('/game', gameRouter);   // <-- Route pour le jeu ajoutée ici
 
 // Gestion des 404
 app.use(function(req, res, next) {

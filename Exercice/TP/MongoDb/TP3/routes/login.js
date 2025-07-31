@@ -26,8 +26,13 @@ router.post('/',
     try {
       const user = await User.findOne({ email: req.body.email.toLowerCase() });
       if (user && await argon2.verify(user.password, req.body.password)) {
-        req.session.user = user;
-        req.flash('success', 'Bienvenue ' + user.email + ' !');
+        // Stockage de l'utilisateur dans la session avec le pseudo
+        req.session.user = {
+          id: user._id,
+          pseudo: user.pseudo,
+          email: user.email
+        };
+        req.flash('success', 'Bienvenue ' + user.pseudo + ' !');
         return res.redirect('/');
       } else {
         req.flash('error', 'Identifiants invalides !');
@@ -40,6 +45,7 @@ router.post('/',
     }
   }
 );
+
 
 // Page d’inscription
 router.get('/register', (req, res) => {
