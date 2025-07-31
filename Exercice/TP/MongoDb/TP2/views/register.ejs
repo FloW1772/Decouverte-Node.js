@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Express Brains</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- this is a link to the css file -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- remember to include custom fonts - if you are using them -->
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@700&display=swap" rel="stylesheet">
+  </head>
+  <body class="container">
+    <%- include('_header') %>
+
+    <div class="row justify-content-md-center m-4">
+      <div class="col-md-8 text-center">
+        <h1 class="text-uppercase text-primary">Créer un compte</h1>
+
+        <form method="post" action="/login/register">
+
+          <!-- Champ pseudo -->
+          <div class="row padding-form">
+            <div class="col-5 text-end">
+              <label for="pseudo" class="form-label">Pseudo</label>
+            </div>
+            <div class="col-7">
+              <input type="text" id="pseudo" name="pseudo"
+              class="<%= (typeof errors != 'undefined' && errors['pseudo'] != 'undefined') ? 'form-control is-invalid' : 'form-control' %>">
+              <% if (typeof errors != 'undefined' && errors['pseudo'] != 'undefined') { %>
+                <div class="text-danger"><%= errors['pseudo'] %></div>
+              <% } %>
+            </div>
+          </div>
+
+          <!-- Champ email -->
+          <div class="row padding-form">
+            <div class="col-5 text-end">
+              <label for="email" class="form-label">Email</label>
+            </div>
+            <div class="col-7">
+              <input type="email" id="email" name="email"
+              class="<%= (typeof errors != 'undefined' && errors['email'] != 'undefined') ? 'form-control is-invalid' : 'form-control' %>">
+              <% if (typeof errors != 'undefined' && errors['email'] != 'undefined') { %>
+                <div class="text-danger"><%= errors['email'] %></div>
+              <% } %>
+            </div>
+          </div>
+
+          <!-- Champ mot de passe -->
+          <div class="row padding-form">
+            <div class="col-5 text-end">
+              <label for="password" class="form-label">Mot de passe</label>
+            </div>
+            <div class="col-7">
+              <input type="password" id="password" name="password"
+              class="<%= (typeof errors != 'undefined' && errors['password'] != 'undefined') ? 'form-control is-invalid' : 'form-control' %>">
+              <% if (typeof errors != 'undefined' && errors['password'] != 'undefined') { %>
+                <div class="text-danger"><%= errors['password'] %></div>
+              <% } %>
+            </div>
+          </div>
+
+          <!-- Champ confirmation du mot de passe -->
+          <div class="row padding-form">
+            <div class="col-5 text-end">
+              <label for="confirmPassword" class="form-label">Confirmer le mot de passe</label>
+            </div>
+            <div class="col-7">
+              <input type="password" id="confirmPassword" name="confirmPassword"
+              class="<%= (typeof errors != 'undefined' && errors['confirmPassword'] != 'undefined') ? 'form-control is-invalid' : 'form-control' %>">
+              <% if (typeof errors != 'undefined' && errors['confirmPassword'] != 'undefined') { %>
+                <div class="text-danger"><%= errors['confirmPassword'] %></div>
+              <% } %>
+            </div>
+          </div>
+
+          <div class="text-center padding-form">
+            <input type="submit" class="btn btn-primary" value="Créer un compte">
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+    <%- include('_footer') %>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
