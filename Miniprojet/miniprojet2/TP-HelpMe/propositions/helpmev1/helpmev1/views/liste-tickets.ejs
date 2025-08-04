@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+      <link rel="stylesheet" href="/stylesheets/main.css" />
+      <link rel="stylesheet" href="/stylesheets/liste-tickets.css" />
+   </head>
+   <body>
+      <%- include('fragments/_header') %>
+
+      <div class="page-container">
+         <h1 class="page-title">Tickets</h1>
+
+         <section class="tickets-section">
+            <div class="tickets-container">
+               <% if(tickets.length === 0) { %>
+               <p>Aucun ticket</p>
+               <% } %> <% for (let i = 0; i < tickets.length; i++) { %>
+               <div class="ticket-list">
+                  <div class="ticket-item">
+                     <h2 class="ticket-title">
+                        <a href="/tickets/<%= tickets[i].id %>"
+                           ><%= tickets[i].titre %></a
+                        >
+                     </h2>
+
+                     <p class="ticket-description">
+                        <%- tickets[i].description %>
+                     </p>
+                     <div class="ticket-etat">
+                        <% if(tickets[i].etat === 'ouvert') { %>
+                        <span class="ticket-ouvert">Ouvert</span>
+                        <% } else { %>
+                        <span class="ticket-clos">Clos</span>
+                        <% } %>
+                     </div>
+                     <div class="ticket-infos">
+                        <span class="ticket-auteur"
+                           ><%= tickets[i].auteur.name %></span
+                        >
+                        <span class="ticket-date"
+                           ><%=tickets[i].creation_formatted %></span
+                        >
+                     </div>
+                  </div>
+               </div>
+               <% } %>
+            </div>
+         </section>
+      </div>
+
+      <%- include('fragments/_footer') %>
+   </body>
+</html>
